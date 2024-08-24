@@ -1,33 +1,27 @@
 input.onButtonPressed(Button.A, function () {
-    total += 1
     helmet += 1
-    basic.showNumber(1)
-    basic.pause(200)
+    total += 1
+    basic.showNumber(0)
+    basic.pause(100)
     basic.clearScreen()
-    datalogger.log(
-    datalogger.createCV("a", helmet),
-    datalogger.createCV("t", no_helmet),
-    datalogger.createCV("b", total)
-    )
 })
 input.onButtonPressed(Button.B, function () {
-    total += 1
     no_helmet += 1
+    total += 1
     basic.showNumber(0)
-    basic.pause(200)
+    basic.pause(100)
     basic.clearScreen()
+})
+datalogger.includeTimestamp(FlashLogTimeStampFormat.Milliseconds)
+datalogger.mirrorToSerial(true)
+basic.showString("H")
+let helmet = 0
+let no_helmet = 0
+let total = 0
+basic.forever(function () {
     datalogger.log(
-    datalogger.createCV("a", helmet),
-    datalogger.createCV("t", no_helmet),
-    datalogger.createCV("b", total)
+    datalogger.createCV("t", total),
+    datalogger.createCV("h", helmet),
+    datalogger.createCV("nh", no_helmet)
     )
 })
-let no_helmet = 0
-let helmet = 0
-let total = 0
-basic.showString("H")
-datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
-datalogger.mirrorToSerial(true)
-total = 0
-helmet = 0
-no_helmet = 0
